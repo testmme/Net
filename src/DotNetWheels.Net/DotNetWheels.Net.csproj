@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetWheels.Core" Version="1.0.5" />
+    <PackageReference Include="DotNetWheels.Security" Version="1.0.6" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="icopy $(TargetDir) E:\lib\$(TargetName)\$(TargetFileName) -include .dll&#xD;&#xA;dotnet pack $(ProjectPath) --no-build --include-symbols -c Release -o E:\Packages" />
+  </Target>
+
+</Project>
